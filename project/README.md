@@ -1,28 +1,204 @@
-# 🛡️ Cybersecurity — Tutorials (MAG, CS, 15 hours)
+# 🛡️ Empirical Project: SSH Security Weakness Study
 
-The repository contains tutorials for the **Cybersecurity** course (MAG, CS), which include practical tasks for developing basic skills in protecting and raising awareness of cybersecurity. Each tutorial has its own folder with a README.md file containing an introduction, objectives, description of activities, analysis, and questions for reflection.
+## 📌 Overview
 
-## 📖 Tutorial list
+In this project, you will perform an empirical analysis of SSH security by simulating brute-force attacks under different configurations.
 
-| Folder | Tutorial content |
-|--------|--------------|
-| `lab00` | Introduction to Linux: basics of working in the shell |
-| `lab01` | Introduction to Kali Linux |
-| `lab02` | Identifying and Preventing Phishing Attacks |
-| `lab03` | Testing SSH Security with Nmap and Hydra |
-| `lab04` | GPG: Key Generation, Encryption, and Signing |
-| `lab05` | Identifying MITM attacks on GPG keys (Web of Trust) |
-| `lab06` | Secrets Management using GPG |
+The goal is to understand how password strength and defensive mechanisms affect the resistance of an SSH service against automated attacks.
 
-## Notes
+---
 
-**Use of AI:** The ChatGPT (OpenAI) tool was used in the development of the content and preparation of the documentation, which served as an aid in generating ideas, optimizing the code and formatting the texts.
-All final solutions were reviewed, verified and, if necessary, adjusted by the project author.
+## 🐳 Lab Setup (Docker)
 
-## References
+This lab uses a preconfigured SSH server running inside Docker.
 
-OpenAI, (2025), *ChatGPT* (Aug 2025) [Large language model], https://chat.openai.com/
+### 1. Start the environment
 
-## Author
+```bash
+docker compose up -d
+```
 
-Asst. Robi Pritržnik, MSc. in Computer and Web Engineering, Faculty of Information Studies in Novo Mesto, academic year 2025/26
+---
+
+### 2. Connect to the SSH server
+
+```bash
+ssh student@localhost -p 2222
+```
+
+Default credentials:
+- Username: `student`
+- Password: `password123`
+
+---
+
+### ⚠️ SSH Warning (IMPORTANT)
+
+If you see the following warning:
+
+```
+WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!
+```
+
+This is expected when restarting Docker containers.
+
+Fix it with:
+
+```bash
+ssh-keygen -R "[localhost]:2222"
+```
+
+Then reconnect.
+
+---
+
+### 3. Add additional users (for experiments)
+
+If the create_users.sh script is not present in docker you can copy the script into the container:
+
+```bash
+docker cp create_users.sh ssh_lab:/create_users.sh
+```
+
+Run it:
+
+```bash
+docker exec -it ssh_lab bash
+chmod +x /create_users.sh
+/create_users.sh
+```
+
+This will create:
+
+| User | Password | Purpose |
+|------|---------|--------|
+| weakuser | 123456 | Easy to crack |
+| mediumuser | Password123 | Moderate |
+| stronguser | Str0ng!Pass#2026 | Hard to crack |
+
+---
+
+### 4. Run brute-force attack
+
+Example using Hydra:
+
+```bash
+hydra -l weakuser -P passwords.txt ssh://localhost:2222
+```
+
+---
+
+### ⚠️ Important
+
+- Perform attacks **only on this local environment**
+- Do NOT target real systems
+
+---
+
+## 🎯 Objectives
+
+- Understand how SSH authentication can be attacked using brute-force techniques  
+- Evaluate the impact of password strength on attack success  
+- Analyze defensive mechanisms such as rate limiting  
+- Collect and interpret empirical data  
+
+---
+
+## 🧪 Scenario
+
+You are a security analyst tasked with evaluating the resilience of an SSH server.
+
+The organization suspects that weak credentials and poor configuration may expose the system to brute-force attacks.
+
+Your job is to test different configurations and provide evidence-based recommendations.
+
+---
+
+## 🛠️ Tools
+
+- `nmap` – scanning  
+- `hydra` – brute-force  
+- Linux (Ubuntu/Kali recommended)  
+
+Optional:
+- Python / Excel  
+
+---
+
+## ⚙️ Experimental Setup
+
+Test at least **3 configurations**:
+
+- Weak password, no protection  
+- Strong password, no protection  
+- Strong password + rate limiting (e.g., fail2ban)  
+
+---
+
+## 🔍 Tasks
+
+### 1. Reconnaissance
+- Identify SSH service using `nmap`
+
+### 2. Brute-force attack
+- Execute attack using `hydra`
+- Record:
+  - success
+  - time
+  - attempts
+
+### 3. Data collection
+
+| Config | Password | Protection | Success | Time | Attempts |
+|--------|----------|-----------|--------|------|----------|
+
+---
+
+### 4. Analysis
+
+- Impact of password strength  
+- Effectiveness of protections  
+- Security vs usability trade-off  
+- Explain how fail2ban would affect your results.
+- Would it prevent brute-force attacks completely?
+- How could an attacker bypass it?
+
+---
+
+### 5. Recommendations
+
+Provide at least 3 improvements.
+
+---
+
+## 📊 Deliverables
+
+Report (5–10 pages):
+
+1. Introduction  
+2. Methodology  
+3. Experiment  
+4. Results  
+5. Discussion  
+6. Conclusion  
+
+---
+
+## 📈 Evaluation
+
+| Criterion | Points |
+|----------|--------|
+| Understanding | 10 |
+| Design | 20 |
+| Execution | 20 |
+| Analysis | 20 |
+| Discussion | 20 |
+| Clarity | 10 |
+
+---
+
+## 💡 Bonus
+
+- Dictionary vs brute-force  
+- Graphs  
+- Additional defenses  
