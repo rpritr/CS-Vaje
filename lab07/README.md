@@ -46,6 +46,10 @@ Before running any script, always inspect it.
 👉 Question:
 - What does this script do?
 
+FIrst lets install the required packages:
+
+    sudo apt install gnupg coreutils
+
 ---
 
 ## ⚙️ Task 2: Generate SHA256 Checksum
