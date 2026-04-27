@@ -13,6 +13,7 @@ The repository contains tutorials for the **Cybersecurity** course (MAG, CS), wh
 | `lab04` | GPG: Key Generation, Encryption, and Signing |
 | `lab05` | Identifying MITM attacks on GPG keys (Web of Trust) |
 | `lab06` | Secrets Management using GPG |
+| `lab07` | Verifying Software Integrity (SHA256 & GPG) |
 
 ## Notes
 
