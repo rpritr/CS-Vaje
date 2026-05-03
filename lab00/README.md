@@ -75,6 +75,8 @@ su - user # switch to the user we created and enter the password
 
 ## 🧪 Exercise: Basic commands
 
+![Environment setup](image.png)
+
 ### 1️⃣ Navigating the system
 ```bash
 pwd # display the current path
@@ -89,7 +91,9 @@ cd .. # move to the parent directory
 - Create the `linux-exercise` directory.
 - Enter it.
 
+![Task 1](image-1.png)
 ---
+
 
 ### 2️⃣ Working with files and directories
 ```bash
@@ -106,7 +110,9 @@ rm -r newFolder # delete the directory with the contents
 - Create the directory `test`.
 - Move `description.txt` to `test`.
 
+![Task 2](image-2.png)
 ---
+
 
 ### 3️⃣ Moving and copying
 ```bash
@@ -118,6 +124,7 @@ mv file.txt /path/to/otherfolder/ # move
 - Rename `description.txt` to `my_profile.txt`.
 - Copy `my_profile.txt` to your home folder.
 
+![Task 3](image-3.png)
 ---
 
 ### 4️⃣ Permissions and Sizes
@@ -131,6 +138,7 @@ chmod 644 file # change permissions
 - Check the size of all files in the folder.
 - Change the permissions of the file `my_profile.txt` to be read-only for everyone.
 
+![Task 4](image-4.png)
 ---
 
 ### 5️⃣ View System Information
@@ -145,6 +153,7 @@ top # active processes
 - Find out your username and the size of your home directory.
 - Check how much space is available on your system.
 
+![Task 5](image-5.png)
 ---
 
 ## 💡 Extra task
@@ -153,6 +162,8 @@ Find the largest file in your home directory:
 ```bash
 du -ah ~ | sort -rh | head -n 5
 ```
+
+![Extra task](image-6.png)
 
 ## References
 

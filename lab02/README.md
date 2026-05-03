@@ -47,7 +47,7 @@ Password: <input type="password" name="password"><br>
 ```
 
 Open the saved page in your browser — this is a simple login form that we will use as a target.
-
+![Task 1](image.png)
 ---
 
 #### 2️⃣ Launch SET and clone the site
@@ -89,6 +89,10 @@ username: test
 password: password123
 ```
 
+I was not able to clone local file so I used http.server module to create a webpage
+
+![Task 3](image-1.png)
+![Task 3 - 2](image-2.png)
 ---
 
 ### 📝 Analysis and Report
@@ -96,16 +100,20 @@ password: password123
 Submit a report with the following content:
 - Screenshot of the fake login page
 - Screenshot of the terminal with the captured data
-- A brief description of how the victim would recognize that it is a phishing page
+- A brief description of how the victim would recognize that it is a phishing page - Victim can recognize it based on domain name, possibly by certificate and that is pretty much it. It can also discover redirect to another domain after doing post. Maybe by analyzing who owns the website IP but it can be a cloud provider and not much of things you can do.
 
 ---
 
 ## 3️⃣ Reflection and Analysis
 
 - What are the characteristics of phishing pages (e.g., a wrong URL)?
-- How would you protect yourself from such an attack?
-- Why do modern sites make such attacks more difficult?
+Characteristics of phishing pages: They mimic legitimate sites but have  signs like misspelled or lookalike domains (e.g., paypa1.com), missing HTTPS, mismatched SSL certificates, and copied but slightly off branding.
 
+- How would you protect yourself from such an attack?
+Always verify the exact URL in the address bar before entering credentials, use a password manager (which won't autofill on fake domains), and enable multi-factor authentication.
+
+- Why do modern sites make such attacks more difficult?
+Why modern sites make it harder: They use HTTPS with strict certificates (HSTS), anti-phishing browser warnings, FIDO2/passkeys tied to the exact origin domain, and CSP headers — all of which break or expose fake replicas.
 ---
 
 📄 *Note: This exercise is for educational purposes only. Never perform these techniques on real users without their knowledge and permission.*

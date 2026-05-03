@@ -55,6 +55,7 @@ The goal is for users to learn how to:
 
 Students will perform the following steps and document the results:
 
+![Container setup](image.png)
 ---
 
 ### 🔷 Step 1: Scan for open ports with Nmap
@@ -71,12 +72,18 @@ Parameters:
 - `-O` — detect operating system (if possible)
 - `-p-` — scan all ports (1-65535)
 
+![Task 2 - 1](image-1.png)
+
 Write down:
 - which ports are open
 - which services are running
 - which operating system version was detected
 
-💡 Reflection: why close unused ports?
+Port 22 is open, ssh service is running and Ubuntu Linux has been detected.
+
+💡 Reflection: why close unused ports? 
+
+To prevent accidental exposure when creating a new service and to not give any response.
 
 We can find the IP of the server inside the docker environment with the command
 ```bash
@@ -92,6 +99,7 @@ ssh testuser@<target_ip> -p 22
 ```
 Password: `test123`
 
+![Task 2 - 2](image-2.png)
 ---
 
 ### 🔷 Step 3: Create a password list
@@ -124,7 +132,7 @@ On success, Hydra will print something like this:
 ```
 [22][ssh] host: <target_ip> login: testuser password: test123
 ```
-
+![Task 2 - 3](image-3.png)
 ---
 
 ## 3️⃣ Analysis and report
@@ -135,6 +143,11 @@ Submit a report with the following contents:
 - Screenshots of both results
 - Short comment: why using weak passwords is dangerous and why closing unused ports
 
+
+- Screenshots of both results have been provided under corresponding tasks
+- Weak passwords are dangerous because they can be cracked quickly via brute force or dictionary attacks.
+- We should close unused ports just in case, this will reduce the attack surface.
+
 ---
 
 ## 4️⃣ Reflection and analysis
@@ -142,3 +155,6 @@ Submit a report with the following contents:
 - How would you protect the SSH server from brute-force attacks?
 - What additional measures (e.g. limits on the number of logins, use of public-private keys, firewall) would you recommend?
 - How does the result change if we use a very strong password?
+
+I would protect the SSH servers from brute-force attacks by having VPN like twingate, so there is no need for public IP, changing the default port which is questionable measure, definetly only allow key based login, SSH can be protected with MFA or with port knocking, only allow inbound IPs of company and so on.
+Attacker just needs more time, without rate limit eventually he would break it. Maybe until that time is reached sun will die, but still :D.

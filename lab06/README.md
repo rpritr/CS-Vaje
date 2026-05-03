@@ -74,7 +74,7 @@ Remove the original:
 ```bash
 rm secrets.env
 ```
-
+![Task 2](image.png)
 ---
 
 ## 🔓 3) Decrypt the secrets
@@ -127,7 +127,7 @@ After use:
 unset API_KEY
 unset DB_PASSWORD
 ```
-
+![Task 5](image-1.png)
 ---
 
 ## 🧪 6) Simulating a repository leak
@@ -154,6 +154,14 @@ Answer:
 3. What happens if we lose the private key?
 4. How would you handle this in a larger enterprise?
 
+1. Secrets in source code get committed to version control, making them visible to anyone with repo access — including historical commits — and they can't be rotated without changing code.
+
+2. Symmetric uses the same key to encrypt and decrypt (fast, but sharing the key is risky). Asymmetric uses a public key to encrypt and a private key to decrypt (slower, but the private key never needs to be shared).
+
+3. Any data encrypted with the corresponding public key becomes permanently unrecoverable — there is no mathematical way to decrypt it without the private key.
+
+4. How would you handle this in a larger enterprise?
+Use a dedicated secrets manager (e.g., Azure Key Vault, HashiCorp Vault) with access control, audit logging, automatic key rotation, and backup/recovery policies for private keys.
 ---
 
 ## ⭐ Additional challenge
@@ -164,12 +172,12 @@ Encrypt secrets for multiple recipients:
 ```bash
 gpg --encrypt --recipient alice@example.com --recipient bob@example.com secrets.env
 ```
-
+![Task +1](image-2.png)
 ### Automatic use (script)
 ```bash
 gpg --decrypt secrets.env.gpg | source /dev/stdin
 ```
-
+![Task +2](image-3.png)
 ---
 
 ## 📌 Summary

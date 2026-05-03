@@ -41,7 +41,7 @@ Check keys:
 ```bash
 gpg --list-keys
 ```
-
+![Task 1](image.png)
 ---
 
 ## ✅ 2) Export and import public key
@@ -65,7 +65,7 @@ Verification:
 ```bash
 gpg --list-keys
 ```
-
+![Task 2](image-1.png)
 ---
 
 ## ✅ 3) Preparing the message
@@ -76,7 +76,7 @@ From: student@example.com
 Date: $(date)
 Secret message: Confidential message" > message.txt
 ```
-
+![Task 3](image-2.png)
 ---
 
 ## ✅ 4) Encrypting and signing
@@ -89,7 +89,7 @@ Result:
 ```
 message.txt.asc
 ```
-
+![Task 4](image-3.png)
 ---
 
 ## ✅ 5) Decrypting and verifying the signature
@@ -101,7 +101,7 @@ gpg --decrypt message.txt.asc > decrypted_message.txt
 ```bash
 cat decrypted_message.txt
 ```
-
+![Task 5](image-4.png)
 Expected output:
 ```
 gpg: Good signature from "Student Name <student@example.com>"
@@ -118,6 +118,11 @@ Include in the report:
 2. Role of public and private key
 3. What happens when an encrypted file is modified
 
+Encryption vs Signing — Encryption hides data so only the intended recipient can read it; signing proves the sender's identity and that the data wasn't tampered with.
+
+Public and private key roles — The private key is kept secret and used to decrypt or sign; the public key is shared openly and used to encrypt or verify signatures.
+
+Modified encrypted file — The decrypted output becomes corrupted/garbage (or decryption fails entirely), since the ciphertext no longer maps to valid plaintext — and if a MAC/signature is present, verification fails outright.
 ---
 
 ## ⭐ Additional tasks
@@ -127,19 +132,19 @@ Include in the report:
 ```bash
 gpg --gen-revoke student@example.com > revoke.asc
 ```
-
+![Task +1](image-5.png)
 ### Signing only (no encryption)
 
 ```bash
 gpg --clearsign message.txt
 ```
-
+![Task +2](image-6.png)
 ### Verifying the signature
 
 ```bash
 gpg --verify message.txt.asc
 ```
-
+![Task +3](image-7.png)
 ---
 
 ## 🧠 Summary
